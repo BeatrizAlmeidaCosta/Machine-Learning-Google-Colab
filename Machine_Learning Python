@@ -1,0 +1,66 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+#criando um conjunto de dadosa fictícios
+
+data = {'nome': ['Alice', 'Bob', 'Charlie', 'David', 'Emily'], 
+        'idade': [25, 30, 22, 35, 28],
+        'salário': [50000, 60000, 45000, 70000, 55000],
+        'pontuação' : [75, 82, 90, 88, 79] }
+
+df = pd.DataFrame(data)
+
+
+#calcular média salarial (Desafio 2)
+
+print("Desafio 2:")
+media_salario = df['salário'].mean()
+media_pontuacao = df['pontuação'].mean()
+print(f"A média salarial é: {media_salario}")
+print(f"A média de pontuação é: {media_pontuacao}")
+print('\n')
+
+#Identificar e remover os dados ausentes (Desafio 3)
+print("Desafio 3:")
+df.dropna(inplace=True)
+print(df)
+print ("\n")
+
+# Gráfico de dispersão (Desafio 4)
+
+print('Desafio 4:')
+plt.scatter(df['idade'], df['salário'])
+plt.xlabel('Idade')
+plt.ylabel('Salário')
+plt.title('Relação entre Idade e Salário')
+plt.show()
+print ("\n")
+
+# Calcular a relação entre idade, salário e pontuação (Desafio 5)
+
+print('Desafio 5:')
+correlacao = df[['idade', 'salário', 'pontuação']].corr()
+print(correlacao)
+
+# Criação do gráfico de barras
+fig, ax1 = plt.subplots()
+
+# Definir o eixo x com a idade
+bar_width = 0.35
+index = df['idade']
+
+# Gráfico de barras para Salario
+ax1.bar(index - bar_width/2, df['salário'], bar_width, label='salário', color='b')
+
+# Gráfico de barras para Pontuacao
+ax1.bar(index + bar_width/2, df['pontuação'], bar_width, label='pontuação', color='g')
+
+# Adicionar labels e título
+ax1.set_xlabel('Idade')
+ax1.set_ylabel('Valores')
+ax1.set_title('Comparação entre Salário e Pontuação por Idade')
+ax1.legend()
+
+# Exibir o gráfico
+plt.show()
+
